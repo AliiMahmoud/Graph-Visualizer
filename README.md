@@ -12,8 +12,40 @@ is a Java Program to apply some algorithms on a visualized graph
 
  - Minimum Java SE Runtime Environment : 5.0 
  
+## Algorithms
+ <table>
+  <tr>
+    <td> Adjacency List </td>
+    <td> Adjacency Matrix</td>
+  </tr>
+  <tr>
+    <td> Incidence Matrix </td>
+    <td> Representation Matrix </td>
+  </tr>
+  <tr>
+    <td> Minimum Spanning Tree</td>
+    <td> Hamiltonian Algorithm</td>
+  </tr>
+  <tr>
+    <td> Euler Algorithm</td>
+    <td> Fluery Algorithm</td>
+  </tr>
+  <tr>
+    <td> Minimum Hamiltonian Cycles/td>
+    <td> Coloring Problem</td>
+  </tr>
+  </table>
 ## Visuals
 <p align="center">
-  <img src="screenshot.png" width="300" title="hover text">
+  <img src="screenshot1.PNG" width="300" title="hover text">
 </p>
-
+ <table>
+  <tr>
+    <td>  <img src="screenshot1.PNG" width="300" title="hover text"></td>
+    <td>  <img src="screenshot2.PNG" width="300" title="hover text"></td>
+  </tr>
+  <tr>
+    <td>  <img src="screenshot3.PNG" width="300" title="hover text"> </td>
+    <td>  <img src="screenshot4.PNG" width="300" title="hover text"> </td>
+  </tr>
+  </table>
