@@ -40,11 +40,11 @@ is a Java Program to apply some algorithms on a visualized graph
 
  <table>
   <tr>
-    <td>  <img src="screenshot1.PNG" width="50%" title="hover text"></td>
-    <td>  <img src="screenshot2.PNG" width="50%" title="hover text"></td>
+    <td>  <img src="screenshot1.PNG" width="400" title="hover text"></td>
+    <td>  <img src="screenshot2.PNG" width="400" title="hover text"></td>
   </tr>
   <tr>
-    <td>  <img src="screenshot3.PNG" width="50%" title="hover text"> </td>
-    <td>  <img src="screenshot4.PNG" width="50%" title="hover text"> </td>
+    <td>  <img src="screenshot3.PNG" width="400" title="hover text"> </td>
+    <td>  <img src="screenshot4.PNG" width="400" title="hover text"> </td>
   </tr>
   </table>
