@@ -3,7 +3,7 @@
 is a Java Program to visualize
   - directed
   - undirected
-  - multigraph
+  - multigraph <br>
 And apply some algorithms on it 
 
 ## Installation
