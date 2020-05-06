@@ -31,8 +31,8 @@ is a Java Program to apply some algorithms on a visualized graph
     <td> Fluery Algorithm</td>
   </tr>
   <tr>
-    <td> Minimum Hamiltonian Cycles/td>
-    <td> Coloring Problem</td>
+    <td> Minimum Hamiltonian Cycles </td>
+    <td> Coloring Problem </td>
   </tr>
   </table>
   
@@ -40,11 +40,11 @@ is a Java Program to apply some algorithms on a visualized graph
 
  <table>
   <tr>
-    <td>  <img src="screenshot1.PNG" width="300" title="hover text"></td>
-    <td>  <img src="screenshot2.PNG" width="300" title="hover text"></td>
+    <td>  <img src="screenshot1.PNG" width="50%" title="hover text"></td>
+    <td>  <img src="screenshot2.PNG" width="50%" title="hover text"></td>
   </tr>
   <tr>
-    <td>  <img src="screenshot3.PNG" width="300" title="hover text"> </td>
-    <td>  <img src="screenshot4.PNG" width="300" title="hover text"> </td>
+    <td>  <img src="screenshot3.PNG" width="50%" title="hover text"> </td>
+    <td>  <img src="screenshot4.PNG" width="50%" title="hover text"> </td>
   </tr>
   </table>
