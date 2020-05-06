@@ -35,10 +35,9 @@ is a Java Program to apply some algorithms on a visualized graph
     <td> Coloring Problem</td>
   </tr>
   </table>
+  
 ## Visuals
-<p align="center">
-  <img src="screenshot1.PNG" width="300" title="hover text">
-</p>
+
  <table>
   <tr>
     <td>  <img src="screenshot1.PNG" width="300" title="hover text"></td>
