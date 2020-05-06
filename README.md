@@ -1,10 +1,9 @@
 ## Graph Visualizer
 
-is a Java Program to visualize
+is a Java Program to apply some algorithms on a visualized graph
   - directed
   - undirected
-  - multigraph <br>
-And apply some algorithms on it 
+  - multigraph 
 
 ## Installation
 
