@@ -13,7 +13,8 @@ is a Java Program to apply some algorithms on a visualized graph
  - Minimum Java SE Runtime Environment : 5.0 
  
 ## Algorithms
- <table>
+<p align="center">
+   <table>
   <tr>
     <td> Adjacency List </td>
     <td> Adjacency Matrix</td>
@@ -35,10 +36,11 @@ is a Java Program to apply some algorithms on a visualized graph
     <td> Coloring Problem </td>
   </tr>
   </table>
+ </p>
   
 ## Visuals
 
- <table>
+ <table align="center">
   <tr>
     <td>  <img src="screenshot1.PNG" width="400" title="hover text"></td>
     <td>  <img src="screenshot2.PNG" width="400" title="hover text"></td>
