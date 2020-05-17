@@ -35,6 +35,10 @@ is a Java Program to apply some algorithms on a visualized graph
     <td> Minimum Hamiltonian Cycles </td>
     <td> Coloring Problem </td>
   </tr>
+  <tr>
+    <td> Maximum Flow </td>
+    <td> Dijkstra </td>
+  </tr>
   </table>
  </p>
   
