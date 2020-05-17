@@ -19,7 +19,6 @@ public class TypeFrame extends JFrame {
 
 	public TypeFrame(String name) {
 		super(name);
-
 		welcomeMsg.setBounds(180, 110, 370, 30);
 		welcomeMsg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 		directed.setBounds(150, 200, 120, 35);

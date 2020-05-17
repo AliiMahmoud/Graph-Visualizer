@@ -10,7 +10,6 @@ import algorithms.MyGraph;
 
 import edu.uci.ics.jung.graph.util.EdgeType;
 
-
 class InputFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +45,7 @@ class InputFrame extends JFrame {
 	Label fromE = new Label("From :");
 	Label toE = new Label("To :");
 	Button submit = new Button("Done");
+
 	public InputFrame(String name, boolean directed) {
 
 		super(name);
@@ -72,7 +72,6 @@ class InputFrame extends JFrame {
 		init();
 	}
 
-	
 	public void init() {
 		addNodeLabel.setBounds(70, 25, 100, 10);
 		addNodeTextField.setBounds(20, 40, 140, 25);
@@ -100,7 +99,6 @@ class InputFrame extends JFrame {
 
 		clear.setBounds(25, 390, 95, 25);
 		clear.setName("clear");
-		
 
 		back.setBounds(25, 420, 95, 25);
 		back.setName("back");
@@ -117,7 +115,6 @@ class InputFrame extends JFrame {
 		addEdgeButton.setName("addEdge");
 		deleteEBtn.setName("deleteEdge");
 
-		
 		addNodeButton.addMouseListener(new mouse());
 		submit.addMouseListener(new mouse());
 		back.addMouseListener(new mouse());
@@ -186,13 +183,11 @@ class InputFrame extends JFrame {
 				deleteETo.setText("");
 			} else if (event.getComponent().getName().equals("submit")) {
 				Home.updateFrame();
-			}
-			else{
-				if(Home.choice == 11 || Home.choice == 10 || Home.choice == 7 || Home.choice == 5 || Home.choice == 6 || Home.choice == 9){
-					Home.home.copy(new HomeFrame("Home"));
-				}
-				else
+			} else {
+				if (Home.choice >= 1 && Home.choice <= 4) {
 					Home.home.copy(new TypeFrame("Select"));
+				} else
+					Home.home.copy(new HomeFrame("Home"));
 			}
 		}
 
@@ -220,4 +215,3 @@ class InputFrame extends JFrame {
 	}
 
 }
- 

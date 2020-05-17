@@ -30,6 +30,7 @@ public class PrintingFrame extends JFrame {
 	private static boolean check = true;
 	String[] starts;
 	String[] ends;
+	int choice = 0;
 
 	public PrintingFrame(int choice) {
 
@@ -52,6 +53,7 @@ public class PrintingFrame extends JFrame {
 		cycle.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		cycle.setName("cycle");
 
+		this.choice = choice;
 		if (choice == 1)
 			adjacencyList();
 		else if (choice == 2)
@@ -72,6 +74,19 @@ public class PrintingFrame extends JFrame {
 			minimumHamiltonian();
 		else if (choice == 6)
 			coloringProblem();
+		else if (choice == 12)
+			maxFlow();
+		else if (choice == 13)
+			dijkstra();
+
+	}
+
+	private void dijkstra() {
+		System.out.println("dijsktra");
+	}
+	
+	private void maxFlow() {
+		System.out.println("maxFlow");
 
 	}
 
@@ -85,10 +100,8 @@ public class PrintingFrame extends JFrame {
 		JScrollPane scrollableTextArea = new JScrollPane(textArea);
 		// scrollableTextArea.setLayout(null);
 		textArea.setBackground(Color.DARK_GRAY);
-		scrollableTextArea
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollableTextArea
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollableTextArea.setBounds(10, 10, 570, 420);
 		getContentPane().add(scrollableTextArea);
 
@@ -99,8 +112,7 @@ public class PrintingFrame extends JFrame {
 			textArea.append("\t " + vertex[i]);
 			for (int j = 0; j < vertex.length; ++j) {
 
-				Object[] innerEdges = graph.findEdgeSet(vertex[i].toString(),
-						vertex[j].toString()).toArray();
+				Object[] innerEdges = graph.findEdgeSet(vertex[i].toString(), vertex[j].toString()).toArray();
 
 				for (Object e : innerEdges) {
 					String edge = e.toString();
@@ -109,8 +121,7 @@ public class PrintingFrame extends JFrame {
 						if (edge.equals(""))
 							textArea.append(" => " + vertex[j]);
 						else
-							textArea.append(" => [" + vertex[j] + ", "
-									+ edge.trim() + "]");
+							textArea.append(" => [" + vertex[j] + ", " + edge.trim() + "]");
 					}
 				}
 			}
@@ -135,8 +146,7 @@ public class PrintingFrame extends JFrame {
 			data[i][0] = (vertex[i].toString());
 			for (int j = 0; j < vertex.length; ++j) {
 
-				Object[] innerEdges = graph.findEdgeSet(vertex[i].toString(),
-						vertex[j].toString()).toArray();
+				Object[] innerEdges = graph.findEdgeSet(vertex[i].toString(), vertex[j].toString()).toArray();
 				for (Object e : innerEdges) {
 					String edge = e.toString();
 					edge = edge.trim();
@@ -317,8 +327,7 @@ public class PrintingFrame extends JFrame {
 			data[i][0] = (vertex[i].toString());
 			for (int j = 0; j < vertex.length; ++j) {
 
-				data[i][j + 1] = graph.findEdgeSet(vertex[i].toString(),
-						vertex[j].toString()).size();
+				data[i][j + 1] = graph.findEdgeSet(vertex[i].toString(), vertex[j].toString()).size();
 			}
 		}
 		JTable table = new JTable(data, columns);
@@ -372,13 +381,11 @@ public class PrintingFrame extends JFrame {
 		for (Object e : graph.getEdges().toArray()) {
 			String from = graph.getEndpoints(e.toString()).getFirst();
 			String to = graph.getEndpoints(e.toString()).getSecond();
-			HamiltonPathAlgorithm.Edge edge = new HamiltonPathAlgorithm.Edge(
-					map.get(from), map.get(to));
+			HamiltonPathAlgorithm.Edge edge = new HamiltonPathAlgorithm.Edge(map.get(from), map.get(to));
 			listOfEgdes.add(edge);
 		}
 
-		HamiltonPathAlgorithm.Graph tempG = new HamiltonPathAlgorithm.Graph(
-				listOfEgdes, V);
+		HamiltonPathAlgorithm.Graph tempG = new HamiltonPathAlgorithm.Graph(listOfEgdes, V);
 		Vector<Integer[]> vec = new Vector<Integer[]>();
 		for (int j = 0; j < V; ++j) {
 			Vector<Integer[]> tempVec = ham.getHamiltonianPaths(tempG, j, V);
@@ -406,8 +413,7 @@ public class PrintingFrame extends JFrame {
 			for (Integer[] arr : vec) {
 				MyGraph element = new MyGraph(EdgeType.UNDIRECTED);
 				if (arr.length == 1)
-					element.addVertex(graph.getVertices().toArray()[0]
-							.toString());
+					element.addVertex(graph.getVertices().toArray()[0].toString());
 				for (i = 0; i < arr.length - 1; ++i) {
 					MapIterator<String, Integer> it = map.mapIterator();
 					String from = "", to = "";
@@ -549,8 +555,7 @@ public class PrintingFrame extends JFrame {
 				panel.vv.setBounds(10, 10, 560 - 20, 360 - 20);
 				add(panel);
 
-				Object[] to = cycles.get(minIndex)
-						.getNeighbors(starts[minIndex]).toArray();
+				Object[] to = cycles.get(minIndex).getNeighbors(starts[minIndex]).toArray();
 				Vector<String> visited = new Vector<String>();
 				visited.add(starts[minIndex]);
 				String first = "";
@@ -595,6 +600,10 @@ public class PrintingFrame extends JFrame {
 		msg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 25));
 		add(msg);
 
+		if (graph.getVertexCount() == 0) {
+			msg.setText("Graph Is Empty");
+			return;
+		}
 		int V = graph.getVertexCount(); // Number of vertices in graph
 		int E = graph.getEdgeCount(); // Number of edges in graph
 		ColoringAlgorithm algorithm = new ColoringAlgorithm(V);
@@ -643,29 +652,28 @@ public class PrintingFrame extends JFrame {
 	private class listen implements MouseListener {
 
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void mouseExited(MouseEvent arg0) {
 
-			// TODO Auto-generated method stub
-
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 
 		}
 
 		public void mouseClicked(MouseEvent arg0) {
 			if (arg0.getComponent().getName().equals("back")) {
-				Home.home.copy(new InputFrame(graph));
+				if (choice == 12 || choice == 13)
+					Home.home.copy(new InputFrame2(graph));
+				else
+					Home.home.copy(new InputFrame(graph));
+
 			} else if (arg0.getComponent().getName().equals("cycle")) {
 				if (cycles.size() == 0)
 					return;
@@ -681,8 +689,7 @@ public class PrintingFrame extends JFrame {
 
 				check = false;
 
-			} else if (arg0.getComponent().getName().equals("another")
-					&& !check) {
+			} else if (arg0.getComponent().getName().equals("another") && !check) {
 
 				msg.setText("Hamiltonian Path " + "Starts From " + start);
 				panel.remove(panel.vv);

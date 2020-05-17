@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Home<Graph-Visualizer>",
+            "request": "launch",
+            "mainClass": "controller.Home",
+            "projectName": "Graph-Visualizer"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Intersector<Graph-Visualizer>",
+            "request": "launch",
+            "mainClass": "edu.uci.ics.jung.visualization.transform.shape.Intersector",
+            "projectName": "Graph-Visualizer"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-LabelWrapper<Graph-Visualizer>",
+            "request": "launch",
+            "mainClass": "edu.uci.ics.jung.visualization.util.LabelWrapper",
+            "projectName": "Graph-Visualizer"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CollectionUtils<Graph-Visualizer>",
+            "request": "launch",
+            "mainClass": "org.apache.commons.collections15.CollectionUtils",
+            "projectName": "Graph-Visualizer"
+        }
+    ]
+}

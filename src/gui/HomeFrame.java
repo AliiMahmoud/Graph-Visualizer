@@ -17,9 +17,12 @@ public class HomeFrame extends JFrame {
 	Button eulerPath = new Button("Euler's Path/Circuit");
 	Button coloring = new Button("Graph Coloring Problem");
 	Button hamiltonPath = new Button("Hamilton's Path/Circuit");
-	Button FA = new Button("Fluery’s  Algorithm");
+	Button FA = new Button("Fluery's  Algorithm");
 	Button MHC = new Button("Min Hamilton Circuit");
 	Button MST = new Button("Minimum Spanning Tree");
+	Button maxFlowButton = new Button("Maximum Flow");
+	Button dijkstra = new Button("Dijkstra Algorithm");
+	Label newText = new Label("NEW");
 
 	public HomeFrame(String name) {
 		super(name);
@@ -27,17 +30,21 @@ public class HomeFrame extends JFrame {
 		welcomeMsg.setBounds(160, 50, 370, 30);
 		welcomeMsg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 30));
 
-		adjList.setBounds(260, 150, 140, 34);
-		adjMat.setBounds(420, 150, 140, 34);
-		incMat.setBounds(260, 200, 140, 34);
-		repMat.setBounds(420, 200, 140, 34);
-		eulerPath.setBounds(260, 250, 140, 34);
-		coloring.setBounds(260, 350, 140, 34);
-		hamiltonPath.setBounds(260, 300, 140, 34);
-//		hamiltonCircuit.setBounds(420, 300, 140, 34);
-		FA.setBounds(420, 250, 140, 34);
-		MHC.setBounds(420, 300, 140, 34);//420, 350, 140, 34
-		MST.setBounds(420, 350, 140, 34);
+		adjList.setBounds(260, 130, 140, 34);
+		adjMat.setBounds(420, 130, 140, 34);
+		incMat.setBounds(260, 180, 140, 34);
+		repMat.setBounds(420, 180, 140, 34);
+		eulerPath.setBounds(260, 230, 140, 34);
+		FA.setBounds(420, 230, 140, 34);
+		coloring.setBounds(260, 330, 140, 34);
+		MST.setBounds(420, 330, 140, 34);
+		hamiltonPath.setBounds(260, 280, 140, 34);
+		MHC.setBounds(420, 280, 140, 34);
+		dijkstra.setBounds(420, 380, 140, 34);
+		maxFlowButton.setBounds(260, 380, 140, 34);
+		newText.setBounds(210, 380, 40, 34);
+		
+		newText.setForeground(Color.RED);
 
 		adjList.setName("adjList");
 		adjMat.setName("adjMat");
@@ -46,10 +53,12 @@ public class HomeFrame extends JFrame {
 		eulerPath.setName("eulerPath");
 		coloring.setName("coloring");
 		hamiltonPath.setName("hamiltonPath");
-//		hamiltonCircuit.setName("hamiltonCircuit");
+		// hamiltonCircuit.setName("hamiltonCircuit");
 		FA.setName("FA");
 		MHC.setName("MHC");
 		MST.setName("MST");
+		maxFlowButton.setName("maxflow");
+		dijkstra.setName("dijkstra");
 
 		adjList.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		adjMat.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
@@ -59,11 +68,16 @@ public class HomeFrame extends JFrame {
 		eulerPath.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		coloring.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		hamiltonPath.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
-//		hamiltonCircuit.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
+		// hamiltonCircuit.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
 		FA.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		MHC.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		MST.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
+
+		maxFlowButton.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
+		dijkstra.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
+		
+		newText.setFont(new Font(Font.DIALOG, Font.BOLD | Font.ITALIC, 15));
 
 		ImageIcon i = new ImageIcon("imgs/graph.png");
 		JLabel l = new JLabel(i);
@@ -73,6 +87,7 @@ public class HomeFrame extends JFrame {
 		JLabel ll = new JLabel(ii);
 		ll.setBounds(25 + 207, 150, 11, 230);
 		this.add(ll);
+		this.add(newText);
 		this.add(welcomeMsg);
 		this.add(l);
 		this.add(adjList);
@@ -80,7 +95,7 @@ public class HomeFrame extends JFrame {
 		this.add(incMat);
 		this.add(repMat);
 
-//		this.add(hamiltonCircuit);
+		// this.add(hamiltonCircuit);
 		this.add(hamiltonPath);
 		this.add(coloring);
 		this.add(eulerPath);
@@ -89,17 +104,22 @@ public class HomeFrame extends JFrame {
 		this.add(MHC);
 		this.add(MST);
 
+		this.add(maxFlowButton);
+		this.add(dijkstra);
+
 		adjList.addMouseListener(new mouse());
 		adjMat.addMouseListener(new mouse());
 		incMat.addMouseListener(new mouse());
 		repMat.addMouseListener(new mouse());
-//		hamiltonCircuit.addMouseListener(a);
+		// hamiltonCircuit.addMouseListener(a);
 		hamiltonPath.addMouseListener(new mouse());
 		coloring.addMouseListener(new mouse());
 		eulerPath.addMouseListener(new mouse());
 		FA.addMouseListener(new mouse());
 		MST.addMouseListener(new mouse());
 		MHC.addMouseListener(new mouse());
+		maxFlowButton.addMouseListener(new mouse());
+		dijkstra.addMouseListener(new mouse());
 		setLayout(null);
 	}
 
@@ -152,7 +172,17 @@ public class HomeFrame extends JFrame {
 				Home.choice = 11;
 				Home.home.copy(new InputFrame("Input", false));
 			}
-			
+
+			if (event.getComponent().getName().equals("maxflow")) {
+				Home.choice = 12;
+				Home.home.copy(new InputFrame2("Input", false));
+			}
+
+			if (event.getComponent().getName().equals("dijkstra")) {
+				Home.choice = 13;
+				Home.home.copy(new InputFrame2("Input", false));
+			}
+
 		}
 
 		public void mousePressed(MouseEvent event) {
