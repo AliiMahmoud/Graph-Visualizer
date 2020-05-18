@@ -7,12 +7,14 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.apache.commons.collections15.MapIterator;
 import org.apache.commons.collections15.map.HashedMap;
 
+import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class PrintingFrame extends JFrame {
@@ -83,6 +85,13 @@ public class PrintingFrame extends JFrame {
 
 	private void dijkstra() {
 		System.out.println("dijsktra");
+		DijkstraShortestPath x = new DijkstraShortestPath<String,String>(graph);
+		ArrayList out = new ArrayList();
+		for(int i = 0; i < out.size(); ++i){
+			System.out.println(out.get(i));
+		}
+
+		
 	}
 	
 	private void maxFlow() {
