@@ -188,6 +188,8 @@ class InputFrame2 extends JFrame {
                 deleteETo.setText("");
             } else if (event.getComponent().getName().equals("submit")) {
                 Home.updateFrame();
+                Home.updateFrameWithSrcAndDest(src.getText().trim(), dest.getText().trim());
+                
             } else {
                 if (Home.choice >= 1 && Home.choice <= 4) {
                     Home.home.copy(new TypeFrame("Select"));

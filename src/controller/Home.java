@@ -17,4 +17,8 @@ public class Home {
 		home.copy(new PrintingFrame(choice));
 	}
 
+	public static void updateFrameWithSrcAndDest(String src, String dest) {
+		home.copy(new PrintingFrame(choice, src, dest));
+	}
+
 }

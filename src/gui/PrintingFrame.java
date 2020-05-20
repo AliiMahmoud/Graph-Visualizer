@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.apache.commons.collections15.MapIterator;
+import org.apache.commons.collections15.Transformer;
 import org.apache.commons.collections15.map.HashedMap;
 
 import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
@@ -34,8 +35,7 @@ public class PrintingFrame extends JFrame {
 	String[] ends;
 	int choice = 0;
 
-	public PrintingFrame(int choice) {
-
+	private void setView() {
 		graph = GraphPanel.getGraph();
 		setLayout(null);
 
@@ -55,6 +55,11 @@ public class PrintingFrame extends JFrame {
 		cycle.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 		cycle.setName("cycle");
 
+	}
+
+	public PrintingFrame(int choice) {
+
+		setView();
 		this.choice = choice;
 		if (choice == 1)
 			adjacencyList();
@@ -76,25 +81,65 @@ public class PrintingFrame extends JFrame {
 			minimumHamiltonian();
 		else if (choice == 6)
 			coloringProblem();
-		else if (choice == 12)
-			maxFlow();
-		else if (choice == 13)
-			dijkstra();
 
 	}
 
-	private void dijkstra() {
-		System.out.println("dijsktra");
-		DijkstraShortestPath x = new DijkstraShortestPath<String,String>(graph);
-		ArrayList out = new ArrayList();
-		for(int i = 0; i < out.size(); ++i){
-			System.out.println(out.get(i));
+	public PrintingFrame(int choice, String from, String to) {
+		setView();
+		this.choice = choice;
+		if (choice == 12)
+			maxFlow(from, to);
+		else if (choice == 13)
+			dijkstra(from, to);
+	}
+
+	private void dijkstra(String from, String to) {
+		msg = new Label("Cost from " + from + " to " + to + " = ");
+		this.setTitle("Dijkstra Algorithm");
+		msg.setBounds(80, 20, 5000, 30);
+		msg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 25));
+		add(msg);
+
+		if (graph.getVertexCount() == 0) {
+			msg.setText("The Graph Has No Vertices");
+			msg.setBounds(90, 20, 400, 30);
+			return;
 		}
 
-		
+		if (!graph.containsVertex(from) || !graph.containsVertex(to)) {
+			msg.setText("Invalid Source Or Destination");
+			return;
+		}
+
+		Transformer<String, Number> nev = new Transformer<String, Number>() {
+			public Number transform(String arg0) {
+				String cost = arg0.trim();
+				if (cost == null || cost.equals("")) {
+					return 0;
+				} else {
+					if (arg0.contains("."))
+						return Double.valueOf(arg0.trim());
+					else
+						return Integer.valueOf(arg0.trim());
+				}
+			}
+		};
+		DijkstraShortestPath x = new DijkstraShortestPath<String, String>(graph, nev);
+		List out = x.getPath(from, to);
+		if (out.size() == 0) {
+			msg.setText("Can't find a path form Source to Destination");
+			msg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 18));
+			msg.setBounds(50, 20, 500, 30);
+			return;
+		}
+		msg.setText(msg.getText() + " " + x.getDistance(from, to));
+		for (int i = 0; i < out.size(); ++i) {
+			System.out.print(graph.getEndpoints(out.get(i).toString()).toArray()[0] + " ");
+			System.out.println(graph.getEndpoints(out.get(i).toString()).toArray()[1]);
+		}
 	}
-	
-	private void maxFlow() {
+
+	private void maxFlow(String from, String to) {
 		System.out.println("maxFlow");
 
 	}
