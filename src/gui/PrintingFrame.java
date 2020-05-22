@@ -7,15 +7,24 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.MapIterator;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.collections15.map.HashedMap;
 
+import edu.uci.ics.jung.algorithms.flows.EdmondsKarpMaxFlow;
 import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
+import edu.uci.ics.jung.graph.DirectedGraph;
+import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class PrintingFrame extends JFrame {
@@ -150,7 +159,57 @@ public class PrintingFrame extends JFrame {
 
 	private void maxFlow(String from, String to) {
 		System.out.println("maxFlow");
+		msg = new Label("MaxFlow from " + from + " to " + to + " = ");
+		this.setTitle("MaxFlow Algorithm");
+		msg.setBounds(80, 20, 5000, 30);
+		msg.setFont(new Font(Font.MONOSPACED, Font.BOLD, 25));
+		add(msg);
 
+		if (graph.getVertexCount() == 0) {
+			msg.setText("The Graph Has No Vertices");
+			msg.setBounds(90, 20, 400, 30);
+			return;
+		}
+
+		if (!graph.containsVertex(from) || !graph.containsVertex(to)) {
+			msg.setText("Invalid Source Or Sink");
+			return;
+		}
+		Transformer<String, Number> nev = new Transformer<String, Number>() {
+			public Number transform(String arg0) {
+				String cost = arg0.trim();
+				if (cost == null || cost.equals("")) {
+					return 0;
+				} else {
+					if (arg0.contains("."))
+						return Double.valueOf(arg0.trim());
+					else
+						return Integer.valueOf(arg0.trim());
+				}
+			}
+		};
+
+		Map<String, Number> edgeFlowMap = new HashMap<String, Number>();
+
+		Factory<String> edgeFactory = new Factory<String>() {
+			int count;
+			public String create() {
+				Random r = new Random();
+				return "" + r.nextInt() % 1000 + 1;
+			}
+		};
+		DirectedGraph dGraph = new DirectedSparseMultigraph<String, String>();
+		for (String v : graph.getVertices()) {
+			dGraph.addVertex(v);
+		}
+		for (String v : graph.getEdges()) {
+			dGraph.addEdge(v, graph.getEndpoints(v).getFirst(), graph.getEndpoints(v).getSecond(), EdgeType.DIRECTED);
+		}
+
+		EdmondsKarpMaxFlow<String, String> maxFlow = new EdmondsKarpMaxFlow<String, String>(dGraph, from, to, nev,
+				edgeFlowMap, edgeFactory);
+		maxFlow.evaluate();
+		System.out.println(maxFlow.getMaxFlow());
 	}
 
 	public void adjacencyList() {
