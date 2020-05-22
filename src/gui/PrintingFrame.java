@@ -133,10 +133,19 @@ public class PrintingFrame extends JFrame {
 			return;
 		}
 		msg.setText(msg.getText() + " " + x.getDistance(from, to));
+		MyGraph path = new MyGraph(graph.et);
 		for (int i = 0; i < out.size(); ++i) {
-			System.out.print(graph.getEndpoints(out.get(i).toString()).toArray()[0] + " ");
-			System.out.println(graph.getEndpoints(out.get(i).toString()).toArray()[1]);
+			String f = graph.getEndpoints(out.get(i).toString()).getFirst();
+			String s = graph.getEndpoints(out.get(i).toString()).getSecond();
+			path.addVertex(f);
+			path.addVertex(s);
+			path.addEdge(f, s, out.get(i).toString());
 		}
+		panel = new GraphPanel(path);
+		panel.setBounds(10, 50, 560, 360);
+		panel.vv.setBounds(10, 10, 560 - 20, 360 - 20);
+		add(panel);
+
 	}
 
 	private void maxFlow(String from, String to) {
