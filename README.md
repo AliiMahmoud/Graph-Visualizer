@@ -10,7 +10,7 @@ is a Java Program to apply some algorithms on a visualized graph
 
 ## Installation
 
- - Minimum Java SE Runtime Environment : 5.0 
+ - Minimum Java SE Runtime Environment : `5.0` 
  
 ## Algorithms
 <p align="center">
