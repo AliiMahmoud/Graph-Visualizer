@@ -175,41 +175,34 @@ public class PrintingFrame extends JFrame {
 			msg.setText("Invalid Source Or Sink");
 			return;
 		}
-		Transformer<String, Number> nev = new Transformer<String, Number>() {
-			public Number transform(String arg0) {
-				String cost = arg0.trim();
-				if (cost == null || cost.equals("")) {
-					return 0;
-				} else {
-					if (arg0.contains("."))
-						return Double.valueOf(arg0.trim());
-					else
-						return Integer.valueOf(arg0.trim());
-				}
-			}
-		};
-
-		Map<String, Number> edgeFlowMap = new HashMap<String, Number>();
-
-		Factory<String> edgeFactory = new Factory<String>() {
-			int count;
-			public String create() {
-				Random r = new Random();
-				return "" + r.nextInt() % 1000 + 1;
-			}
-		};
-		DirectedGraph dGraph = new DirectedSparseMultigraph<String, String>();
-		for (String v : graph.getVertices()) {
-			dGraph.addVertex(v);
+		HashedMap<String, Integer> map = new HashedMap<String, Integer>();
+		int i = 0;
+		for (Object o : graph.getVertices().toArray()) {
+			map.put(o.toString(), i);
+			i++;
 		}
-		for (String v : graph.getEdges()) {
-			dGraph.addEdge(v, graph.getEndpoints(v).getFirst(), graph.getEndpoints(v).getSecond(), EdgeType.DIRECTED);
+		int[][] repGraph = new int[graph.getVertexCount()][graph.getVertexCount()];
+		for (i = 0; i < graph.getVertexCount(); ++i) {
+			for (int j = 0; j < graph.getVertexCount(); ++j) {
+				repGraph[i][j] = 0;
+			}
 		}
+		for (Object e : graph.getEdges().toArray()) {
+			String f = graph.getEndpoints(e.toString()).getFirst();
+			String t = graph.getEndpoints(e.toString()).getSecond();
 
-		EdmondsKarpMaxFlow<String, String> maxFlow = new EdmondsKarpMaxFlow<String, String>(dGraph, from, to, nev,
-				edgeFlowMap, edgeFactory);
-		maxFlow.evaluate();
-		System.out.println(maxFlow.getMaxFlow());
+			i = map.get(f);
+			int j = map.get(t);
+			int weight = 0;
+			if (!e.toString().trim().equals("")) {
+				weight = Integer.parseInt(e.toString().trim());
+			}
+			repGraph[i][j] = weight;
+		}
+		MaxFlowAlgorithm maxflow = new MaxFlowAlgorithm(graph.getVertexCount());
+		int result = maxflow.getMaxFlow(repGraph, map.get(from), map.get(to));
+		msg.setText(msg.getText() + result);
+
 	}
 
 	public void adjacencyList() {
