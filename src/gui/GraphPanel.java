@@ -26,6 +26,10 @@ public class GraphPanel extends JPanel {
 		graph = a;
 		updateView();
 	}
+	public GraphPanel() {
+		
+		updateView();
+	}
 
 	public void changeColor(String colors, int max) {
 

@@ -46,16 +46,30 @@ class InputFrame extends JFrame {
 	Label toE = new Label("To :");
 	Button submit = new Button("Done");
 
+	Label srcLabel = new Label("Source");
+	Label destLabel = new Label("Destination");
+	TextField src = new TextField();
+	TextField dest = new TextField();
+
 	public InputFrame(String name, boolean directed) {
 
 		super(name);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(350, 150);
 		setSize(600, 500);
-		if (directed == true)
-			p = new GraphPanel(new MyGraph(EdgeType.DIRECTED));
-		else
-			p = new GraphPanel(new MyGraph(EdgeType.UNDIRECTED));
+		if (directed == true) {
+			if (GraphPanel.getGraph() == null || GraphPanel.getGraph().et.equals(EdgeType.UNDIRECTED))
+				p = new GraphPanel(new MyGraph(EdgeType.DIRECTED));
+			else
+				p = new GraphPanel();
+
+		} else {
+
+			if (GraphPanel.getGraph() == null || GraphPanel.getGraph().et.equals(EdgeType.DIRECTED))
+				p = new GraphPanel(new MyGraph(EdgeType.UNDIRECTED));
+			else
+				p = new GraphPanel();
+		}
 		init();
 	}
 
@@ -106,6 +120,11 @@ class InputFrame extends JFrame {
 		submit.setBounds(140, 420, 60, 25);
 		submit.setName("submit");
 
+		srcLabel.setBounds(50, 369, 70, 20);
+		src.setBounds(25, 390, 80, 25);
+		destLabel.setBounds(130, 369, 65, 25);
+		dest.setBounds(124, 390, 80, 25);
+
 		submit.setFont(new Font(Font.MONOSPACED, Font.BOLD, 17));
 		back.setFont(new Font(Font.MONOSPACED, Font.BOLD, 17));
 		clear.setFont(new Font(Font.MONOSPACED, Font.BOLD, 17));
@@ -145,8 +164,14 @@ class InputFrame extends JFrame {
 		add(costLabel);
 		add(cost);
 		add(back);
-		add(clear);
 		add(p);
+		if (Home.choice == 12 || Home.choice == 13) {
+			add(src);
+			add(srcLabel);
+			add(dest);
+			add(destLabel);
+		} else
+			add(clear);
 	}
 
 	private class mouse implements MouseListener, MouseMotionListener {
@@ -182,8 +207,12 @@ class InputFrame extends JFrame {
 				deleteEFrom.setText("");
 				deleteETo.setText("");
 			} else if (event.getComponent().getName().equals("submit")) {
-				Home.updateFrame();
+				if (Home.choice == 12 || Home.choice == 13)
+					Home.updateFrameWithSrcAndDest(src.getText().trim(), dest.getText().trim());
+				else
+					Home.updateFrame();
 			} else {
+
 				if (Home.choice >= 1 && Home.choice <= 4) {
 					Home.home.copy(new TypeFrame("Select"));
 				} else

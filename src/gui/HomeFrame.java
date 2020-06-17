@@ -175,12 +175,12 @@ public class HomeFrame extends JFrame {
 
 			if (event.getComponent().getName().equals("maxflow")) {
 				Home.choice = 12;
-				Home.home.copy(new InputFrame2("Input", true));
+				Home.home.copy(new InputFrame("Input", true));
 			}
 
 			if (event.getComponent().getName().equals("dijkstra")) {
 				Home.choice = 13;
-				Home.home.copy(new InputFrame2("Input", false));
+				Home.home.copy(new InputFrame("Input", false));
 			}
 
 		}

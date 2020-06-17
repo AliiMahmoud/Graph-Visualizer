@@ -103,6 +103,7 @@ public class PrintingFrame extends JFrame {
 	}
 
 	private void dijkstra(String from, String to) {
+		System.out.println("dijkstra");
 		msg = new Label("Cost from " + from + " to " + to + " = ");
 		this.setTitle("Dijkstra Algorithm");
 		msg.setBounds(80, 20, 5000, 30);
@@ -785,7 +786,7 @@ public class PrintingFrame extends JFrame {
 		public void mouseClicked(MouseEvent arg0) {
 			if (arg0.getComponent().getName().equals("back")) {
 				if (choice == 12 || choice == 13)
-					Home.home.copy(new InputFrame2(graph));
+					Home.home.copy(new InputFrame(graph));
 				else
 					Home.home.copy(new InputFrame(graph));
 
